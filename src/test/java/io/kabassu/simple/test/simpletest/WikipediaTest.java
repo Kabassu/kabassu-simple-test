@@ -16,7 +16,7 @@ import io.kabassu.simple.test.simpletest.pageobjects.DefinitionPage;
 public class WikipediaTest {
 
   private static final String SEARCH_QUERY = "hello world";
-  private static final String HEADING = "\"Hello, World!\" program";
+  private static final String HEADING = "\"Hello, World!\" Failure";
 
   @Inject
   private BobcatPageFactory bobcatPageFactory;
@@ -26,6 +26,13 @@ public class WikipediaTest {
 
   @Test
   public void wikipediaSearchTest() {
+    WikipediaPage homePage = bobcatPageFactory.create("https://en.wikipedia.org", WikipediaPage.class);
+    homePage.open().getSearchComponent().searchForQuery(SEARCH_QUERY);
+    assertThat(definitionPage.getHeading(), is(HEADING));
+  }
+  
+  @Test
+  public void wikipediaSearchFailedTest() {
     WikipediaPage homePage = bobcatPageFactory.create("https://en.wikipedia.org", WikipediaPage.class);
     homePage.open().getSearchComponent().searchForQuery(SEARCH_QUERY);
     assertThat(definitionPage.getHeading(), is(HEADING));

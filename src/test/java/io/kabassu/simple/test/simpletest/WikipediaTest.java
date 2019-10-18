@@ -28,7 +28,7 @@ public class WikipediaTest {
   public void wikipediaSearchTest() {
     WikipediaPage homePage = bobcatPageFactory.create("https://en.wikipedia.org", WikipediaPage.class);
     homePage.open().getSearchComponent().searchForQuery(SEARCH_QUERY);
-    assertThat(definitionPage.getHeading(), is(HEADING));
+    assertThat(definitionPage.getHeading(), is("\"Hello, World!\" program"));
   }
   
   @Test
